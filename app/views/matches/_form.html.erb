@@ -1,0 +1,43 @@
+<%= form_for @match, :html => { :class => 'form-horizontal' } do |f| %>
+
+    <% if @match.errors.any? %>
+        <div>
+          <% @match.errors.full_messages.each do |msg| %>
+              <div class="alert alert-error fade in">
+                <a href="#" data-dismiss="alert" class="close">×</a>
+                <%= msg %>
+              </div>
+          <% end %>
+        </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :challenger_id, 'Winner', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :challenger_id,
+          options_from_collection_for_select(@teams, :id, :fullname, @match.challenger_id),
+          {}, :class => 'chzn-select' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :defender_id, 'Beats Loser', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :defender_id,
+          options_from_collection_for_select(@teams, :id, :fullname, @match.defender_id),
+          {}, :class => 'chzn-select' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  matches_path, :class => 'btn' %>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.chzn-select').chosen();
+      });
+    </script>
+<% end %>

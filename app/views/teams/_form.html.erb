@@ -1,0 +1,44 @@
+<%= form_for @team, :html => { :class => 'form-horizontal' } do |f| %>
+
+    <% if @team.errors.any? %>
+        <div>
+          <% @team.errors.full_messages.each do |msg| %>
+              <div class="alert alert-error fade in">
+                <a href="#" data-dismiss="alert" class="close">×</a>
+                <%= msg %>
+              </div>
+          <% end %>
+        </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :first_player, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :players,
+          options_from_collection_for_select(@players, :id, :fullname, :players),
+          {}, :class => 'chzn-select' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :second_player, :class => 'control-label' %>
+      <div class="controls">
+        <%= select :team2,
+          :players,
+          options_from_collection_for_select(@players, :id, :fullname),
+          {}, :class => 'chzn-select' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  teams_path, :class => 'btn' %>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.chzn-select').chosen();
+      });
+    </script>
+<% end %>

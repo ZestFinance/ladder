@@ -1,0 +1,25 @@
+<div class="page-header">
+  <h1>Zest Ping Pong History</h1>
+</div>
+
+<table class="table table-striped">
+  <tr>
+    <th>Date</th>
+    <th>Defender</th>
+    <th>Challenger</th>
+    <th>Winner</th>
+  </tr>
+
+  <% @matches.each do |match| %>
+      <tr>
+        <td><%= match.updated_at.to_formatted_s(:long) %></td>
+        <td><%= match.defender.fullname unless match.defender.nil? %></td>
+        <td><%= match.challenger.fullname unless match.challenger.nil? %></td>
+        <td><%= match.winner.fullname unless match.winner.nil? %></td>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+
+

@@ -1,0 +1,52 @@
+<%- model_class = Player -%>
+<div class="page-header">
+  <h1>Ping Pong Ladder</h1>
+</div>
+
+<div>
+  <ul class="nav nav-tabs">
+    <li class="<%= 'active' if @ladder == 1 %>"><a href="<%= ladder_index_path ladder: 1 %>">Singles</a></li>
+    <li class="<%= 'active' if @ladder == 2 %>"><a href="<%= ladder_index_path ladder: 2 %>">Doubles</a></li>
+  </ul>
+</div>
+
+<div>
+  <% if @ladder == 1 %>
+    <%= link_to 'Enter Match Result', new_match_path, :class => 'btn btn-primary' %>
+  <% else %>
+    <%= link_to 'Enter Doubles Match Result', new_match_path(ladder: 2), :class => 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<br/>
+
+<table class="table table-striped">
+  <tr>
+    <th><%= model_class.human_attribute_name(:rating) %></th>
+    <th><%= model_class.human_attribute_name("name") %></th>
+
+    <th><%= model_class.human_attribute_name("Won") %></th>
+    <th><%= model_class.human_attribute_name("Lost") %></th>
+    <th><%= model_class.human_attribute_name("Matches Played") %></th>
+  </tr>
+  <tbody>
+  <% @teams.each do |team| %>
+      <tr>
+        <% rank = team.rating.value %>
+        <% rank = 'unranked' if rank == nil %>
+
+        <td><%= rank %></td>
+
+        <% if @ladder == 1 %>
+          <td> <%= image_tag(gravatar_url(team.players[0].email, :size => 32)) %> <%= team.fullname %></td>
+        <% else %>
+          <td> <%= image_tag(gravatar_url(team.players[0].email, :size => 32)) %> <%= image_tag(gravatar_url(team.players[1].email, :size => 32)) %> <%= team.fullname %></td>
+        <% end %>
+
+        <td><%= Match.total_wins(team) %></td>
+        <td><%= Match.total_loses(team) %></td>
+        <td><%= Match.total_matches(team) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

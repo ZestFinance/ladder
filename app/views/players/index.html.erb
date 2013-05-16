@@ -1,0 +1,51 @@
+<%- model_class = Player -%>
+<div class="page-header">
+  <h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+
+<div>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_player_path,
+              :class => 'btn btn-primary' %>
+</div>
+<br/>
+
+<table class="table table-striped">
+
+  <tr>
+    <th><%= model_class.human_attribute_name("name") %></th>
+    <th><%= model_class.human_attribute_name(:created_at) %></th>
+    <th><%= t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
+
+  <tbody>
+  <% @players.each do |player| %>
+      <tr>
+        <td><%= image_tag(gravatar_url(player.email, :size => 32)) %> <%= link_to "#{player.first_name} #{player.last_name}", player_path(player) %></td>
+
+        <td><%= player.created_at.to_formatted_s(:long) %></td>
+
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_player_path(player), :class => 'btn btn-mini' %>
+
+          <% if player.active %>
+              <%= link_to "Deactivate",
+                          toggle_status_player_path(player),
+                          :method => :post,
+                          :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm",
+                                                                            :default => 'This will remove the ranking for this player.  Are you sure?'))},
+                          :class => 'btn btn-mini btn-danger' %>
+          <% else %>
+              <%= link_to "Activate",
+                          toggle_status_player_path(player),
+                          :method => :post,
+                          :class => 'btn btn-mini btn-primary' %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+

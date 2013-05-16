@@ -1,0 +1,25 @@
+
+# Ignore bundler config
+/.bundle
+
+*.gem
+*.rbc
+.bundle
+vendor/bundle
+.config
+coverage
+InstalledFiles
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
+log/*
+:
+# YARD artifacts
+.yardoc
+_yardoc
+doc/
+tags

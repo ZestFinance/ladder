@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Defender:</b>
+  <%= @match.defender.last_name %>
+</p>
+
+<p>
+  <b>Challenger:</b>
+  <%= @match.challenger.last_name  %>
+</p>
+
+<p>
+  <b>Winner:</b>
+  <%= @match.winner.last_name unless @match.winner.nil? %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_match_path(@match) %> |
+<%= link_to 'Back', matches_path %>

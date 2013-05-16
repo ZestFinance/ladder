@@ -1,0 +1,31 @@
+<%- model_class = Team -%>
+
+<h1>Doubles</h1>
+
+<div>
+  <%= link_to 'Create New Team',
+              new_team_path,
+              :class => 'btn btn-primary' %>
+</div>
+<br/>
+
+<table class="table table-striped">
+
+  <tr>
+    <th><%= model_class.human_attribute_name("Player") %></th>
+    <th><%= model_class.human_attribute_name("Player") %></th>
+    <th><%= model_class.human_attribute_name(:created_at) %></th>
+  </tr>
+
+  <tbody>
+  <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.players[0].fullname if !team.players[0].nil? %></td>
+        <td><%= team.players[1].fullname if !team.players[1].nil? %></td>
+
+        <td><%= team.created_at.to_formatted_s(:long) %></td>
+
+      </tr>
+  <% end %>
+  </tbody>
+</table>

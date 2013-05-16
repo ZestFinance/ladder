@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ladder</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+
+<div class="navbar navbar-inverse .navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href=<%= ladder_index_path ladder: 1 %>> <img src="/assets/logo.png"></a>
+
+      <ul class="nav">
+        <li class="<%= 'active' if params[:controller] == 'ladder' %>"><a  href=<%= ladder_index_path ladder: 1 %>>Ladder</a></li>
+        <li class="<%= 'active' if params[:controller] == 'players' %>"><a href=<%= players_path %>>Players</a></li>
+        <li class="<%= 'active' if params[:controller] == 'teams' %>"><a href=<%= teams_path %>>Teams</a></li>
+        <li class="<%= 'active' if params[:controller] == 'matches' %>"><a href=<%= matches_path %>>History</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<body>
+
+<div class="container-fluid">
+  <%= yield %>
+</div>
+
+</body>
+</html>
