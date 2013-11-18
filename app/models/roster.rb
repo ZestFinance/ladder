@@ -1,5 +1,10 @@
 class Roster < ActiveRecord::Base
-  attr_accessible :player_id, :team_id
   belongs_to :player
   belongs_to :team
+
+  private
+
+  def roster_params
+    params.permit :player_id, :team_id
+  end
 end

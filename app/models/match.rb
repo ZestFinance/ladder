@@ -1,5 +1,4 @@
 class Match < ActiveRecord::Base
-  attr_accessible :challenger_id, :defender_id, :winner_id
   belongs_to :defender, class_name: Team, foreign_key: :defender_id
   belongs_to :challenger, class_name: Team, foreign_key: :challenger_id
   belongs_to :winner, class_name: Team, foreign_key: :winner_id

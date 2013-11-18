@@ -1,5 +1,4 @@
 class Team < ActiveRecord::Base
-  attr_accessible :ladder, :name, :players, :rank
   has_one :rating,  autosave: true, dependent: :destroy
   has_many :rosters
   has_many :players, through: :rosters
@@ -61,5 +60,11 @@ class Team < ActiveRecord::Base
   # return all teams that a player is part off
   def self.all_by_player(player)
     Team.includes(:players).where("players.id = #{player.id}")
+  end
+
+  private
+
+  def player_params
+     params.permit :ladder, :name, :players, :rank
   end
 end

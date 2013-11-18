@@ -25,8 +25,7 @@ class MatchesController < ApplicationController
 
   # POST /matches
   def create
-    params[:match].merge!({ winner_id: params[:match][:challenger_id] })
-    @match = Match.new(params[:match])
+    @match = Match.new(new_match_params)
 
     if @match.save
       Rater::TrueSkillRater.update_ratings @match.winner, @match.defender
@@ -53,5 +52,12 @@ class MatchesController < ApplicationController
     @match = Match.find(params[:id])
     @match.destroy
     redirect_to matches_url
+  end
+
+  private
+
+  def new_match_params
+    new_params = params[:match].merge!({ winner_id: params[:match][:challenger_id] })
+    new_params.permit :challenger_id, :defender_id, :winner_id
   end
 end

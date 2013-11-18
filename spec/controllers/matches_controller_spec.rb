@@ -74,7 +74,7 @@ describe MatchesController do
       @team2 = Team.create
     end
 
-    context 'successful' do
+    context 'when successful' do
       before do
         Rater::TrueSkillRater.should_receive(:update_ratings).with(@team1, @team2)
       end

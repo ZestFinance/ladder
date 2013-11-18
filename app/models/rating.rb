@@ -1,5 +1,4 @@
 class Rating < ActiveRecord::Base
-  attr_accessible :deviation, :mean, :player_id, :value
   belongs_to :player
 
   def to_trueskill
@@ -12,5 +11,11 @@ class Rating < ActiveRecord::Base
                    mean: trueskill.mean,
                    deviation: trueskill.deviation }
     update_attributes! attributes
+  end
+
+  private
+
+  def rating_params
+    params.permit :deviation, :mean, :player_id, :value
   end
 end
