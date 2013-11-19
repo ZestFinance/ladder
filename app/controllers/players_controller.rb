@@ -16,12 +16,12 @@ class PlayersController < ApplicationController
 
   # GET /players/1/edit
   def edit
-    @player = Player.find(params[:id])
+    @player = Player.find(player_params[:id])
   end
 
   # POST /players
   def create
-    @player = Player.new(params[:player])
+    @player = Player.new(player_params[:player])
     @player.teams << Team.new
 
     if @player.save
@@ -35,7 +35,7 @@ class PlayersController < ApplicationController
   def update
     @player = Player.find(params[:id])
 
-    if @player.update_attributes(params[:player])
+    if @player.update_attributes(player_params[:player])
       redirect_to @player, notice: 'Player was successfully updated.'
     else
       render action: "edit"
@@ -48,5 +48,12 @@ class PlayersController < ApplicationController
     player.active = !player.active
     player.save!
     redirect_to players_path
+  end
+
+
+  private
+
+  def player_params
+    params.permit :id, player: [:email, :first_name, :last_name, :rank, :active]
   end
 end

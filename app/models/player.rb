@@ -8,9 +8,4 @@ class Player < ActiveRecord::Base
     return "#{first_name} #{last_name}"
   end
 
-  private
-
-  def player_params
-    params.permit :email, :first_name, :last_name, :rank, :active, :id
-  end
 end
