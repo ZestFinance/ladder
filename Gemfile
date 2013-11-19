@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-
 gem 'rails', '~> 4.0.1'
 
 # Bundle edge Rails instead:
@@ -8,26 +7,27 @@ gem 'rails', '~> 4.0.1'
 # gem 'mysql2'
 gem 'pg'
 gem 'trueskill', :git => 'git://github.com/saulabs/trueskill.git', :require => "saulabs/trueskill"
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'unicorn'
 gem 'thin'
 gem 'syslogger'
+gem 'compass-rails', github: 'Compass/compass-rails'
+gem 'chosen-rails', '~> 1.0.1'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 4.0.1'
-  gem 'coffee-rails', '~> 4.0.1'
+# group :assets do
+gem 'sass-rails',   '~> 4.0.1'
+gem 'coffee-rails', '~> 4.0.1'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
-  gem 'twitter-bootstrap-rails', '~> 2.2.8'
-  gem 'compass-rails', github: 'Compass/compass-rails'
-  gem 'chosen-rails', '~> 1.0.1'
-end
+gem 'uglifier', '>= 1.0.3'
+#  gem 'twitter-bootstrap-rails', '~> 2.2.8'
+# end
 
 gem 'jquery-rails'
 
